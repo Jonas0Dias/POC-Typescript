@@ -1,5 +1,5 @@
 import connectionDb from "../config/database.js";
-
+import { Filme } from "../protocols/filme.js";
 
 
 async function findAll() {
@@ -13,7 +13,7 @@ async function findAll() {
     );
   }
 
-  async function addFilm({nome, plataforma, status}) {
+  async function addFilm({nome, plataforma, status}: Filme) {
     return await connectionDb.query(
       `
           INSERT INTO 
@@ -22,11 +22,11 @@ async function findAll() {
           VALUES 
           ($1, $2, $3) 
 
-      `,[nome, plataforma, status]
+      `,[nome , plataforma, status]
     );
   }
 
-  async function findByName(nome) {
+  async function findByName(nome : String) {
     return await connectionDb.query(
       `
       SELECT *
@@ -37,7 +37,7 @@ async function findAll() {
     );
   }
 
-  async function findById(filme_id) {
+  async function findById(filme_id: String) {
     return await connectionDb.query(
       `
       SELECT *
@@ -48,7 +48,7 @@ async function findAll() {
     );
   }
 
-  async function findGenero(genero) {
+  async function findGenero(genero: String ) {
     return await connectionDb.query(
       `
       SELECT *
@@ -60,7 +60,7 @@ async function findAll() {
   }
 
 
-  async function addGenero(g) {
+  async function addGenero(g : String) {
     console.log(g)
     return await connectionDb.query(
       `
@@ -74,7 +74,7 @@ async function findAll() {
     );
   }
 
-  async function updateFilm(filme_id) {
+  async function updateFilm(filme_id: String) {
     return await connectionDb.query(
       `
       UPDATE filmes
@@ -86,7 +86,7 @@ async function findAll() {
   }
 
 
-  async function deleteFilm(filme_id) {
+  async function deleteFilm(filme_id: String) {
     return await connectionDb.query(
       `
       DELETE FROM filmes
